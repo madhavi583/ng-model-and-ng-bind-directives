@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="myModule">
+<head>
+<title>Welcome To AngularJS! Introduction To $http Services</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-controller="myController">
+<input type="text" ng-model="searchBox">
+<div >
+   <ul>
+  <h2>Names and age of programs in the local area:</h2>
+  {{person}}
+  <li ng-repeat="person in persons | filter:searchBox">
+    
+    {{person.Name + ':' + person.Age}}
+    
+  </li>
+  </ul>
+  </div>
+<script>
+var myApp=angular.module('myModule',[]);
+myApp.controller('myController',function($scope,$http){
+  //alert('controller');
+    $http.get('http://localhost/angularanother/database.json')
+    .then(function (response){
+      alert(JSON.stringify(response));
+        $scope.persons =response.data.data;
+        console.log(response);
+    },function(error){
+     alert(JSON.stringify(error)); 
+    });
+    });
+</script>
+</body>
+</html>

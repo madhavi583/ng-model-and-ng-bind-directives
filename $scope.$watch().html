@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="myModule">
+<head>
+<title>Welcome To AngularJS! Introduction $scope.$watch()</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body >
+  <div ng-controller="myController">
+  <input type="text" ng-model="message">
+  <br>You Updated textbox:{{counter}} times
+  </div>
+  <script>
+  var app=angular.module('myModule',[]);
+  app.controller('myController',function($scope){
+   // $scope.message=message;
+   $scope.counter =0;
+   $scope.$watch('message',function(newValue,oldValue){
+//console.log("New value:"+ newValue);
+//console.log("Old value:"+oldValue);
+$scope.counter++;
+if($scope.counter == 100)
+{
+alert('congo!');
+}
+
+   })
+ });
+  </script>
+</body>
+</html>
